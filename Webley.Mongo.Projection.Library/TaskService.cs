@@ -1,8 +1,8 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using Webley.Mongo.Projection.Shared;
 
-namespace Webley.Mongo.Projection.Console;
-
+namespace Webley.Mongo.Projection.Library;
 public class TaskService
 {
     private readonly IMongoCollection<TaskEntity> _taskCollection;
@@ -101,8 +101,9 @@ public class TaskService
             }));
 
         var dataFacet = AggregateFacet.Create("data",
-            PipelineDefinition<TaskEntity, TaskHeader>.Create(new[]
+            PipelineDefinition<TaskEntity, TaskHeader>.Create(new IPipelineStageDefinition[]
             {
+                PipelineStageDefinitionBuilder.Skip<TaskEntity>(1),
                 PipelineStageDefinitionBuilder.Project(projection)
             }));
 

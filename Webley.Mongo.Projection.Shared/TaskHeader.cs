@@ -1,11 +1,10 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace Webley.Mongo.Projection.Console;
+namespace Webley.Mongo.Projection.Shared;
 
-public class TaskEntity
+public class TaskHeader
 {
-    [BsonId]
     public Guid Id { get; set; }
     public string? Name { get; set; }
-    public string[]? Links { get; set; }
+    public int LinkCount { get; set; }
 }
